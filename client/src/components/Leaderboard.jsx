@@ -6,27 +6,27 @@ const Leaderboard = () => {
   const [leaders, setLeaders] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchLeaderboard = async () => {
-      try {
-       const res = await fetch("https://quiz-tmeo.onrender.com");
-        const data = await res.json();
-        const filtered = data
-          .filter((u) => u.scores[topic] !== "Not Attempted")
-          .map((u) => ({
-            name: u.name,
-            score: u.scores[topic],
-          }))
-          .sort((a, b) => b.score - a.score);
-        setLeaders(filtered);
-      } catch (err) {
-        alert("Error fetching leaderboard");
-      }
-    };
-    fetchLeaderboard();
-  }, [topic]);
+ useEffect(() => {
+  const fetchLeaderboard = async () => {
+    try {
+     const res = await fetch(`${import.meta.env.VITE_API_URL}/users/all`);
 
-  return (
+      const data = await res.json();
+      const filtered = data
+        .filter((u) => u.scores[topic] !== "Not Attempted")
+        .map((u) => ({
+          name: u.name,
+          score: u.scores[topic],
+        }))
+        .sort((a, b) => b.score - a.score);
+      setLeaders(filtered);
+    } catch (err) {
+      alert("Error fetching leaderboard");
+    }
+  };
+  fetchLeaderboard();
+}, [topic]);
+return(
     <div style={styles.container}>
       <div style={styles.card}>
         <h2 style={styles.title}>🏆 {topic} Leaderboard</h2>

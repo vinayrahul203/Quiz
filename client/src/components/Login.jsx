@@ -10,7 +10,7 @@ const Login = () => {
     if (!name || !email) return alert("Enter all fields");
 
     try {
-      const res = await fetch("https://quiz-tmeo.onrender.com", {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users`, { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),

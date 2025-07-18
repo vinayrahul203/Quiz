@@ -46,14 +46,14 @@ const Quiz = () => {
     }
   };
 
-  const handleSubmit = async () => {
-    await axios.post("https://quiz-tmeo.onrender.com", {
-      email: user.email,
-      topic,
-      score,
-    });
-    navigate(`/result/${topic}`);
-  };
+const handleSubmit = async () => {
+  await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/submit`, {
+    email: user.email,
+    topic,
+    score,
+  });
+  navigate(`/result/${topic}`);
+};
 
   if (!user) return <p>Please login again</p>;
   if (questions.length === 0) return <p>Loading quiz...</p>;

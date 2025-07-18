@@ -10,7 +10,8 @@ const Result = () => {
   useEffect(() => {
     const fetchScore = async () => {
       try {
-        const res = await fetch(`https://quiz-tmeo.onrender.com/${user.email}`);
+     const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/users/${user.email}`);
+
         const data = await res.json();
         setScore(data.scores[topic]);
       } catch (err) {
