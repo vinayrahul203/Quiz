@@ -10,7 +10,7 @@ const Result = () => {
   useEffect(() => {
     const fetchScore = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/users/${user.email}`);
+        const res = await fetch(`https://quiz-tmeo.onrender.com/${user.email}`);
         const data = await res.json();
         setScore(data.scores[topic]);
       } catch (err) {

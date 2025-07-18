@@ -47,7 +47,7 @@ const Quiz = () => {
   };
 
   const handleSubmit = async () => {
-    await axios.post("http://localhost:5000/api/quiz/submit", {
+    await axios.post("https://quiz-tmeo.onrender.com", {
       email: user.email,
       topic,
       score,

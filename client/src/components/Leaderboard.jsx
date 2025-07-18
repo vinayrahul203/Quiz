@@ -9,7 +9,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
-       const res = await fetch("http://localhost:5000/api/quiz/users/all");
+       const res = await fetch("https://quiz-tmeo.onrender.com");
         const data = await res.json();
         const filtered = data
           .filter((u) => u.scores[topic] !== "Not Attempted")
