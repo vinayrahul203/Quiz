@@ -1,123 +1,93 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Leaderboard = () => {
   const { topic } = useParams();
   const [leaders, setLeaders] = useState([]);
   const navigate = useNavigate();
 
- useEffect(() => {
-  const fetchLeaderboard = async () => {
-    try {
-     const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/users/all`);
-      const data = await res.json();
-      const filtered = data
-        .filter((u) => u.scores[topic] !== "Not Attempted")
-        .map((u) => ({
-          name: u.name,
-          score: u.scores[topic],
-        }))
-      .sort((a, b) => Number(b.score) - Number(a.score));
-      setLeaders(filtered);
-    } catch (err) {
-      alert("Error fetching leaderboard");
-    }
-  };
-  fetchLeaderboard();
-}, [topic]);
-return(
+  useEffect(() => {
+    const fetchLeaders = async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/api/quiz/leaderboard/${topic}`
+        );
+        const data = await res.json();
+        setLeaders(data);
+      } catch (err) {
+        alert("Error loading leaderboard");
+      }
+    };
+
+    fetchLeaders();
+  }, [topic]);
+
+  return (
     <div style={styles.container}>
-      <div style={styles.card}>
-        <h2 style={styles.title}>🏆 {topic} Leaderboard</h2>
-        <table style={styles.table}>
-          <thead>
-            <tr style={styles.headerRow}>
-              <th style={styles.headerCell}>Rank</th>
-              <th style={styles.headerCell}>Name</th>
-              <th style={styles.headerCell}>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaders.length === 0 ? (
-              <tr>
-                <td colSpan="3" style={styles.empty}>No users attempted this quiz yet.</td>
-              </tr>
-            ) : (
-              leaders.map((user, index) => (
-                <tr key={index} style={styles.row}>
-                  <td style={styles.cell}>{index + 1}</td>
-                  <td style={styles.cell}>{user.name}</td>
-                  <td style={styles.cell}>{user.score}</td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-        <button style={styles.backBtn} onClick={() => navigate("/topics")}>
-          ⬅️ Back to Topics
-        </button>
-      </div>
+      <h2 style={styles.heading}>🏆 {topic} Leaderboard</h2>
+      {leaders.length === 0 ? (
+        <p style={styles.noData}>No scores yet for this topic.</p>
+      ) : (
+        <ol style={styles.list}>
+          {leaders.map((user, index) => (
+            <li key={index} style={styles.item}>
+              <span>{user.name}</span>
+              <span style={styles.score}>{user.score}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+      <button style={styles.button} onClick={() => navigate("/topics")}>
+        Back to Topics
+      </button>
     </div>
   );
 };
 
 const styles = {
   container: {
-    minHeight: "100vh",
-    background: "linear-gradient(to right, #ff9966, #ff5e62)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     padding: "2rem",
-  },
-  card: {
-    background: "white",
-    padding: "2rem",
-    borderRadius: "15px",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-    width: "100%",
-    maxWidth: "600px",
     textAlign: "center",
+    background: "linear-gradient(to right, #1d976c, #93f9b9)",
+    minHeight: "100vh",
   },
-  title: {
+  heading: {
     fontSize: "2rem",
-    marginBottom: "1.5rem",
-    color: "#333",
+    color: "#fff",
+    marginBottom: "1rem",
   },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    marginBottom: "1.5rem",
+  noData: {
+    color: "#fff",
+    fontSize: "1.2rem",
   },
-  headerRow: {
-    background: "#667eea",
-    color: "white",
-  },
-  headerCell: {
-    padding: "12px",
-    fontSize: "1rem",
-  },
-  row: {
-    borderBottom: "1px solid #ddd",
-  },
-  cell: {
-    padding: "10px",
-    fontSize: "1rem",
-  },
-  empty: {
-    padding: "1rem",
-    fontStyle: "italic",
-    color: "#666",
-  },
-  backBtn: {
-    padding: "12px 20px",
-    backgroundColor: "#667eea",
-    color: "white",
-    fontSize: "1rem",
+  list: {
+    listStyle: "none",
+    padding: 0,
+    maxWidth: "400px",
+    margin: "auto",
+    background: "#fff",
     borderRadius: "10px",
-    border: "none",
-    cursor: "pointer",
+    boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+  },
+  item: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "1rem",
+    borderBottom: "1px solid #eee",
     fontWeight: "bold",
+  },
+  score: {
+    color: "#1d976c",
+  },
+  button: {
+    marginTop: "2rem",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "10px",
+    background: "#fff",
+    color: "#1d976c",
+    fontWeight: "bold",
+    cursor: "pointer",
   },
 };
 
