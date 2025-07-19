@@ -17,7 +17,7 @@ const Leaderboard = () => {
           name: u.name,
           score: u.scores[topic],
         }))
-        .sort((a, b) => b.score - a.score);
+      .sort((a, b) => Number(b.score) - Number(a.score));
       setLeaders(filtered);
     } catch (err) {
       alert("Error fetching leaderboard");
