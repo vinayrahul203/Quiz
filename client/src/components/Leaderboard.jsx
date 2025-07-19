@@ -38,7 +38,7 @@ const Leaderboard = () => {
         </ol>
       )}
       <button style={styles.button} onClick={() => navigate("/topics")}>
-        Back to Topics
+        ⬅️ Back to Topics
       </button>
     </div>
   );
@@ -48,48 +48,49 @@ const styles = {
   container: {
     padding: "2rem",
     textAlign: "center",
-    background: "linear-gradient(to right, #1d976c, #93f9b9)",
+    background: "linear-gradient(to right, #1d2671, #c33764)", // deep purple to pink
     minHeight: "100vh",
   },
   heading: {
     fontSize: "2rem",
-    color: "#fff",
-    marginBottom: "1rem",
+    color: "#f5f5f5", // light gray for visibility
+    marginBottom: "1.5rem",
   },
   noData: {
-    color: "#fff",
+    color: "#f5f5f5",
     fontSize: "1.2rem",
+    fontStyle: "italic",
   },
   list: {
     listStyle: "none",
     padding: 0,
     maxWidth: "400px",
     margin: "auto",
-    background: "#fff",
-    borderRadius: "10px",
-    boxShadow: "0 0 10px rgba(0,0,0,0.2)",
-
+    background: "#2d2d2d", // dark container background
+    borderRadius: "12px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
   },
   item: {
     display: "flex",
     justifyContent: "space-between",
     padding: "1rem",
-    borderBottom: "1px solid #eee",
+    borderBottom: "1px solid #444",
     fontWeight: "bold",
-    color: "#333",
+    color: "#f0f0f0", // light text
   },
   score: {
-    color: "#1d976c",
+    color: "#00e676", // neon green score
   },
   button: {
     marginTop: "2rem",
     padding: "10px 20px",
     border: "none",
     borderRadius: "10px",
-    background: "#fff",
-    color: "#1d976c",
+    background: "#00e676",
+    color: "#000",
     fontWeight: "bold",
     cursor: "pointer",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
   },
 };
 
