@@ -68,6 +68,7 @@ const styles = {
     background: "#fff",
     borderRadius: "10px",
     boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+
   },
   item: {
     display: "flex",
@@ -75,6 +76,7 @@ const styles = {
     padding: "1rem",
     borderBottom: "1px solid #eee",
     fontWeight: "bold",
+    color: "#333",
   },
   score: {
     color: "#1d976c",
