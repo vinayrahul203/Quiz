@@ -10,7 +10,6 @@ const Leaderboard = () => {
   const fetchLeaderboard = async () => {
     try {
      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/users/all`);
-
       const data = await res.json();
       const filtered = data
         .filter((u) => u.scores[topic] !== "Not Attempted")
