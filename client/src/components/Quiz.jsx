@@ -14,7 +14,7 @@ const Quiz = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/quiz/questions/${topic}`)
+      .get(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/questions/${topic}`)
       .then((res) => setQuestions(res.data))
       .catch(() => alert("Failed to load questions"));
   }, [topic]);
