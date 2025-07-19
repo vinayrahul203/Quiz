@@ -65,31 +65,36 @@ router.get('/questions/:topic', (req, res) => {
 });
 
 // Submit score for a topic
+
 router.post('/submit', async (req, res) => {
   try {
     const { email, topic, score } = req.body;
-
-    console.log("Incoming POST /submit →", req.body);
 
     if (!email || !topic || score === undefined) {
       return res.status(400).json({ message: "Missing email, topic, or score" });
     }
 
     const user = await User.findOne({ email });
-
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     const currentScore = user.scores[topic];
 
-    // Update only if new score is better
+    // Update score only if higher
     if (
       currentScore === "Not Attempted" ||
       Number(score) > Number(currentScore)
     ) {
       user.scores[topic] = score;
       await user.save();
+
+      // ✅ Update leaderboard as well
+      await Leaderboard.findOneAndUpdate(
+        { email, topic },
+        { name: user.name, score, topic, email, date: new Date() },
+        { upsert: true, new: true }
+      );
     }
 
     res.json({ message: "Score updated", scores: user.scores });
@@ -98,6 +103,7 @@ router.post('/submit', async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 // Get top 5 leaderboard for a topic
 router.get('/leaderboard/:topic', async (req, res) => {
