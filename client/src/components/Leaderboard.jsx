@@ -9,7 +9,7 @@ const Leaderboard = () => {
  useEffect(() => {
   const fetchLeaderboard = async () => {
     try {
-     const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/quiz//users/all`);
+     const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/quiz/users/all`);
 
       const data = await res.json();
       const filtered = data
