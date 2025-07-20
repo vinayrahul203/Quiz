@@ -78,5 +78,5 @@ npm run dev
 ## 🧑‍💻 Author
 
 Built  by   
-[GitHub](https://github.com/vinayrahul203) 
+[Vinay Rahul](https://github.com/vinayrahul203) 
 ---
