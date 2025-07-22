@@ -102,13 +102,16 @@ const styles = {
     alignItems: "center",
   },
   timer: {
-    fontSize: "1.2rem",
-    background: "#fff",
-    padding: "10px 20px",
-    borderRadius: "30px",
-    marginBottom: "1rem",
-    fontWeight: "bold",
-  },
+  fontSize: "1.2rem",
+  background: "#333",
+  color: "#fff",
+  padding: "10px 20px",
+  borderRadius: "30px",
+  marginBottom: "1rem",
+  fontWeight: "bold",
+},
+
+
   card: {
     background: "white",
     padding: "2rem",
