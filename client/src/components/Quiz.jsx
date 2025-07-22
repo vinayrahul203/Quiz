@@ -104,7 +104,7 @@ const styles = {
   timer: {
   fontSize: "1.2rem",
   background: "#333",
-  color: "#fff",
+  color: "#f12711",
   padding: "10px 20px",
   borderRadius: "30px",
   marginBottom: "1rem",
